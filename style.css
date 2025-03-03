@@ -108,12 +108,145 @@ input {
     cursor: pointer;
 }
 
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 16px; /* Adjust gap as needed */
+}
+
+.btn {
+    width: fit-content;
+    border-radius: 8px; /* Adjust for rounded corners */
+    font-size: 0.875rem; /* Text size */
+    padding: 10px 20px; /* Padding for buttons */
+    height: 50px; /* Fixed height */
+    border: 1px solid transparent; /* Default border */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: all 0.3s; /* Smooth transition */
+}
+
+.save-btn {
+    background-color: #7c3aed; /* Violet background */
+    color: white; /* Text color */
+    border-color: #7c3aed; /* Border color */
+}
+
+.save-btn:hover {
+    background-color: #6d28d9; /* Darker violet on hover */
+}
+
+.save-btn:focus {
+    background-color: #5b21b6; /* Darker violet on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 0 4px rgba(156, 163, 175, 0.5); /* Focus ring */
+}
+
+.cancel-btn {
+    background-color: transparent; /* Transparent background */
+    color: black; /* Primary text color */
+    border-color: lightgray; /* Primary border color */
+}
+
+.cancel-btn:focus {
+    box-shadow: 0 0 0 4px rgba(156, 163, 175, 0.5); /* Focus ring */
+}
+
 /* Pied de page */
+/* Section contact */
 .contact {
 
     color: #ffffff;
     padding: 2rem;
 }
+ul {
+    list-style: none;
+}
+  
+.example-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.example-2 .icon-content {
+    margin: 0 10px;
+    position: relative;
+}
+
+  .example-2 .icon-content a {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #4d4d4d;
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .example-2 .icon-content a:hover {
+    box-shadow: 3px 2px 45px 0px rgb(0 0 0 / 12%);
+  }
+
+  .example-2 .icon-content a svg {
+    position: relative;
+    z-index: 1;
+    width: 25px;
+    height: 25px;
+  }
+
+  .example-2 .icon-content a:hover {
+    color: white;
+  }
+
+  .example-2 .icon-content a .filled {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: #000;
+    transition: all 0.3s ease-in-out;
+  }
+  .example-2 .icon-content a:hover .filled {
+    height: 100%;
+  }
+  
+  .example-2 .icon-content a[data-social="linkedin"] .filled,
+  .example-2 .icon-content a[data-social="linkedin"] ~ .tooltip {
+    background-color: #0274b3;
+  }
+  
+  .example-2 .icon-content a[data-social="facebook"] .filled,
+  .example-2 .icon-content a[data-social="facebook"] ~ .tooltip {
+    background-color: #3b5998;
+  }
+  .example-2 .icon-content a[data-social="instagram"] .filled,
+  .example-2 .icon-content a[data-social="instagram"] ~ .tooltip {
+    background: linear-gradient(
+      45deg,
+      #405de6,
+      #5b51db,
+      #b33ab4,
+      #c135b4,
+      #e1306c,
+      #fd1f1f
+    );
+  }
+  .example-2 .icon-content a[data-social="youtube"] .filled,
+  .example-2 .icon-content a[data-social="youtube"] ~ .tooltip {
+    background-color: #ff0000;
+  }  
+.couleur{
+    color:  #D28C64;
+}
+
 
 .container-contact {
     display: flex;
@@ -168,17 +301,7 @@ input {
 footer {
     text-align: center;
     font-size: 0.7rem;
-    margin-top: 0rem;
-}
-
-.partie-g footer{
-    padding-right: 35px;
-    padding-bottom: 50px;
-}
-.partie-d footer{
-    width: 400px;
-    text-align: start;
-
+    margin-top: 0.5rem;
 }
 
 /* Responsive */
