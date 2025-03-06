@@ -8,56 +8,80 @@
 </head>
 <body>
     <header class="top-bar">
-        <div class="menu-icon">☰</div>
-        <h1>Profile</h1>
-        <div class="profile-picture">
-            <img src="./profil-pic.png" alt="Photo de profil">
- 
+        <div class="menu-icon" onclick="toggleNav()">☰</div>
+        <div class="sidebar" id="sidebar">
+          <div>
+            <button class="close-btn" onclick="toggleNav()">✖</button>
+            <ul>
+              <li><a href="https://moumouh6.github.io/Users-Dashboard/" > Accueil</a></li>
+              <li><a href="#" class="active"> Profile</a></li>
+              <li><a href="https://moumouh6.github.io/Messages/"> Message</a></li>
+              <li><a  class="site-mzl"> Notification</a></li>
+              <li><a class="site-mzl">Aide</a></li>
+            </ul>
+          </div>
+
+          <div class="sidebar-footer">
+            <a  class="site-mzl"> Paramètres</a>
+            <a href="https://moumouh6.github.io/Interface/" class="logout"> Se déconnecter</a>
+          </div>
         </div>
+        <h1>Profile</h1>
+
+        <div class="profile-picture">
+          <img src="./profil-pic.png" alt="Photo de profil" class="profile-pic" id="profilePic">
+          <input type="file" id="uploadProfilePic" accept="image/*" style="display: none;">
+            <div class="btn-container">
+               <button id="changePicBtn">Modifier</button>
+               <button id="deletePicBtn">Supprimer</button>
+            </div>
+        </div>
+
+      
     </header>
 
     <main class="profile-container">
         <form>
             <div class="form-group">
-                <div class="input-box">
-                    <label>Nom</label>
-                    <input type="text" value="nom">
-                </div>
-                <div class="input-box">
-                    <label>Prénom</label>
-                    <input type="text" value="prenom">
-                </div>
+              <div class="input-box">
+                  <label>Nom</label>
+                  <input type="text" id="nom" value="nom">
+              </div>
+              <div class="input-box">
+                  <label>Prénom</label>
+                  <input type="text" id="prenom" value="prenom">
+              </div>
             </div>
-
+          
             <div class="form-group">
-                <div class="input-box">
-                    <label>Email</label>
-                    <input type="email" value="A************@gmail.com">
-                </div>
+              <div class="input-box">
+                  <label>Email</label>
+                  <input type="email" id="email" value="A************@gmail.com">
+              </div>
             </div>
-
+          
             <div class="form-group">
-                <div class="input-box">
-                    <label>Numéro de Téléphone</label>
-                    <input type="text" value="07********">
-                </div>
+              <div class="input-box">
+                  <label>Numéro de Téléphone</label>
+                  <input type="text" id="telephone" value="07********">
+              </div>
             </div>
-
+          
             <div class="form-group">
-                <div class="input-box">
-                    <label>Département</label>
-                    <input type="text" value="IT">
-                </div>
-                <div class="input-box">
-                    <label>Function</label>
-                    <input type="text" value="Étudiant">
-                </div>
+              <div class="input-box">
+                  <label>Département</label>
+                  <input type="text" id="departement" value="IT">
+              </div>
+              <div class="input-box">
+                  <label>Function</label>
+                  <input type="text" id="fonction" value="Étudiant">
+              </div>
             </div>
 
             <div class="form-group">
                 <div class="input-box password-box">
                     <label>Mot de Passe</label>
-                    <input type="password" value="************">
+                    <input type="password" id="password" value="123" required>
                     <span class="toggle-password"><img src="./Vector.png" alt="password"></span>
                 </div>
             </div>
@@ -192,5 +216,6 @@
             </div>
         </div>
     </section>
+    <script src="index.js"></script>
 </body>
 </html>
