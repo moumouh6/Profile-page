@@ -82,10 +82,15 @@ document.addEventListener("DOMContentLoaded", function () {
         newDeletePicBtn.style.borderRadius = "5px";
         newDeletePicBtn.style.cursor = "pointer";
         newDeletePicBtn.addEventListener("click", function () {
-            profilePic.src = defaultImage; // Reset to default image
-            enlargedImg.src = defaultImage; // Update enlarged image
-            localStorage.removeItem("profileImage"); // Remove from local storage
+            const confirmDelete = confirm("Êtes-vous sûr de vouloir supprimer votre photo de profil ?");
+            if (confirmDelete) {
+                profilePic.src = defaultImage; // Reset profile image
+                enlargedImg.src = defaultImage; // Update enlarged image
+                localStorage.removeItem("profileImage"); // Remove from local storage
+                overlay.remove(); // Close overlay after deleting
+            }
         });
+        
 
         // Append buttons to the button container
         btnContainer.appendChild(newChangePicBtn);
