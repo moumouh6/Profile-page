@@ -1,23 +1,38 @@
-
-function toggleNav() {
-    let sidebar = document.getElementById("sidebar");
-    
-    // Vérifie si la sidebar est déjà visible
-    if (sidebar.style.left === "0px") {
-        sidebar.style.left = "-250px"; // Cache la sidebar
-    } else {
-        sidebar.style.left = "0px"; // Affiche la sidebar
+document.addEventListener("DOMContentLoaded", function () {
+    // Sidebar toggle function
+    function toggleNav() {
+        let sidebar = document.getElementById("sidebar");
+        sidebar.style.left = sidebar.style.left === "0px" ? "-250px" : "0px";
     }
-}
-    
 
-    // Sélection de l'image de profil
-    const profilePic = document.querySelector(".profile-pic");
+    document.querySelector(".menu-icon").addEventListener("click", toggleNav);
+    document.querySelector(".close-btn").addEventListener("click", toggleNav);
 
-    // Ajouter un événement au clic sur l'image de profil
+    // Alert for unavailable pages
+    document.querySelectorAll(".site-mzl").forEach(button => {
+        button.addEventListener("click", () => {
+            alert("Cette page n'est pas accessible pour le moment !");
+        });
+    });
+
+    // Profile picture handling
+    const profilePic = document.getElementById("profilePic");
+    const uploadInput = document.getElementById("uploadProfilePic");
+    const changePicBtn = document.getElementById("changePicBtn");
+    const deletePicBtn = document.getElementById("deletePicBtn");
+    const defaultImage = "./profil-pic.png"; // Default image path
+
+    // Function to open overlay with enlarged image
     profilePic.addEventListener("click", function () {
-        // Créer une div pour l'overlay sombre
+        // Remove existing overlay if it exists
+        const existingOverlay = document.getElementById("imgOverlay");
+        if (existingOverlay) {
+            existingOverlay.remove();
+        }
+
+        // Create overlay
         const overlay = document.createElement("div");
+        overlay.id = "imgOverlay";
         overlay.style.position = "fixed";
         overlay.style.top = "0";
         overlay.style.left = "0";
@@ -25,11 +40,12 @@ function toggleNav() {
         overlay.style.height = "100vh";
         overlay.style.background = "rgba(0, 0, 0, 0.7)";
         overlay.style.display = "flex";
+        overlay.style.flexDirection = "column";
         overlay.style.alignItems = "center";
         overlay.style.justifyContent = "center";
         overlay.style.zIndex = "1000";
 
-        // Créer une image agrandie
+        // Create enlarged image
         const enlargedImg = document.createElement("img");
         enlargedImg.src = profilePic.src;
         enlargedImg.style.width = "300px";
@@ -38,103 +54,110 @@ function toggleNav() {
         enlargedImg.style.border = "5px solid white";
         enlargedImg.style.cursor = "pointer";
 
-        // Ajouter l'image agrandie à l'overlay
-        overlay.appendChild(enlargedImg);
-        document.body.appendChild(overlay);
+        // Create button container
+        const btnContainer = document.createElement("div");
+        btnContainer.style.display = "flex";
+        btnContainer.style.gap = "10px";
+        btnContainer.style.marginTop = "10px";
 
-        // Ajouter un événement pour fermer l'image agrandie en cliquant sur l'overlay
-        overlay.addEventListener("click", function () {
-            document.body.removeChild(overlay);
-        });
-    });
-
-    document.querySelectorAll(".site-mzl").forEach(button => {
-        button.addEventListener("click", () => {
-            alert("cette page n'est pas accessible pour le moment!");
-        });
-    });
-
-
-    // modifier la photo de profile
-
-    document.addEventListener("DOMContentLoaded", function () {
-        const profilePic = document.getElementById("profilePic");
-        const uploadInput = document.getElementById("uploadProfilePic");
-        const changePicBtn = document.getElementById("changePicBtn");
-        const deletePicBtn = document.getElementById("deletePicBtn");
-    
-        const defaultImage = "./profil-pic.png"; // Image par défaut
-    
-        // Ouvrir le sélecteur de fichier
-        changePicBtn.addEventListener("click", function () {
+        // Create new buttons
+        const newChangePicBtn = document.createElement("button");
+        newChangePicBtn.textContent = "Modifier";
+        newChangePicBtn.style.backgroundColor = "#7c3aed";
+        newChangePicBtn.style.color = "white";
+        newChangePicBtn.style.padding = "10px 15px";
+        newChangePicBtn.style.border = "none";
+        newChangePicBtn.style.borderRadius = "5px";
+        newChangePicBtn.style.cursor = "pointer";
+        newChangePicBtn.addEventListener("click", function () {
             uploadInput.click();
         });
-    
-        // Lorsque l'utilisateur sélectionne une nouvelle image
-        uploadInput.addEventListener("change", function (event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    profilePic.src = e.target.result; // Afficher la nouvelle image
-                    localStorage.setItem("profileImage", e.target.result); // Sauvegarde locale
-                };
-                reader.readAsDataURL(file);
+
+        const newDeletePicBtn = document.createElement("button");
+        newDeletePicBtn.textContent = "Supprimer";
+        newDeletePicBtn.style.backgroundColor = "red";
+        newDeletePicBtn.style.color = "white";
+        newDeletePicBtn.style.padding = "10px 15px";
+        newDeletePicBtn.style.border = "none";
+        newDeletePicBtn.style.borderRadius = "5px";
+        newDeletePicBtn.style.cursor = "pointer";
+        newDeletePicBtn.addEventListener("click", function () {
+            profilePic.src = defaultImage; // Reset to default image
+            enlargedImg.src = defaultImage; // Update enlarged image
+            localStorage.removeItem("profileImage"); // Remove from local storage
+        });
+
+        // Append buttons to the button container
+        btnContainer.appendChild(newChangePicBtn);
+        btnContainer.appendChild(newDeletePicBtn);
+
+        // Append everything to overlay
+        overlay.appendChild(enlargedImg);
+        overlay.appendChild(btnContainer);
+        document.body.appendChild(overlay);
+
+        // Close overlay when clicking outside
+        overlay.addEventListener("click", function (event) {
+            if (event.target === overlay) {
+                overlay.remove();
             }
         });
-    
-        // Bouton pour supprimer la photo et remettre l'image par défaut
-        deletePicBtn.addEventListener("click", function () {
-            profilePic.src = defaultImage; // Remettre l'image par défaut
-            localStorage.removeItem("profileImage"); // Supprimer du stockage local
-        });
-    
-        // Charger l'image depuis le stockage local si elle existe
-        const savedImage = localStorage.getItem("profileImage");
-        if (savedImage) {
-            profilePic.src = savedImage;
-        }
     });
 
-    
-    // enregistrer et supprimer les infos
+    // Upload profile picture
+    uploadInput.addEventListener("change", function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                profilePic.src = e.target.result; // Update profile picture
+                localStorage.setItem("profileImage", e.target.result); // Save to local storage
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const saveBtn = document.querySelector(".save-btn");
-        const cancelBtn = document.querySelector(".cancel-btn");
-    
-        // Sélectionner tous les champs d'entrée du formulaire
-        const inputs = document.querySelectorAll(".input-box input");
-    
-        // Charger les données enregistrées
-        function loadProfileData() {
-            inputs.forEach(input => {
-                const savedValue = localStorage.getItem(input.id);
-                if (savedValue) {
-                    input.value = savedValue;
+                // Also update enlarged image if overlay is open
+                const enlargedImg = document.querySelector("#imgOverlay img");
+                if (enlargedImg) {
+                    enlargedImg.src = e.target.result;
                 }
-            });
+            };
+            reader.readAsDataURL(file);
         }
-    
-        // Sauvegarder les informations du profil
-        saveBtn.addEventListener("click", function () {
-            inputs.forEach(input => {
-                localStorage.setItem(input.id, input.value);
-            });
-            alert("Informations enregistrées avec succès !");
-        });
-    
-        // Annuler les modifications et revenir aux dernières valeurs enregistrées
-        cancelBtn.addEventListener("click", function () {
-            loadProfileData();
-            alert("Modifications annulées !");
-        });
-    
-        // Charger les données enregistrées au chargement de la page
-        loadProfileData();
     });
-    
-    // afficher et masquer le mot de passe 
+
+    // Load saved profile picture from local storage
+    const savedImage = localStorage.getItem("profileImage");
+    if (savedImage) {
+        profilePic.src = savedImage;
+    }
+
+    // Save and restore user details
+    const saveBtn = document.querySelector(".save-btn");
+    const cancelBtn = document.querySelector(".cancel-btn");
+    const inputs = document.querySelectorAll(".input-box input");
+
+    function loadProfileData() {
+        inputs.forEach(input => {
+            const savedValue = localStorage.getItem(input.id);
+            if (savedValue) {
+                input.value = savedValue;
+            }
+        });
+    }
+
+    saveBtn.addEventListener("click", function () {
+        inputs.forEach(input => {
+            localStorage.setItem(input.id, input.value);
+        });
+        alert("Informations enregistrées avec succès !");
+    });
+
+    cancelBtn.addEventListener("click", function () {
+        loadProfileData();
+        alert("Modifications annulées !");
+    });
+
+    loadProfileData();
+
+    // Toggle password visibility
     const togglePassword = document.querySelector(".toggle-password");
     const passwordInput = document.getElementById("password");
 
@@ -143,3 +166,4 @@ function toggleNav() {
             passwordInput.type = passwordInput.type === "password" ? "text" : "password";
         });
     }
+});
