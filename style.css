@@ -83,7 +83,6 @@ body {
 }
 
 .close-btn:hover {
-    transform: rotate(90deg);
     color: red;
 }
 
@@ -298,9 +297,9 @@ input {
 
 .btn {
     width: fit-content;
-    border-radius: 8px; /* Adjust for rounded corners */
+    border-radius: 20px; /* Adjust for rounded corners */
     font-size: 0.875rem; /* Text size */
-    padding: 10px 20px; /* Padding for buttons */
+    padding: 10px 15px; /* Padding for buttons */
     height: 50px; /* Fixed height */
     border: 1px solid transparent; /* Default border */
     cursor: pointer; /* Pointer cursor on hover */
@@ -522,7 +521,7 @@ footer {
         justify-content: space-between;
     }
     header{
-        width: 100%;
+        width: 90%;
     }
 
     /* Faire monter le titre */

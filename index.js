@@ -8,12 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".menu-icon").addEventListener("click", toggleNav);
     document.querySelector(".close-btn").addEventListener("click", toggleNav);
 
-    // Alert for unavailable pages
-    document.querySelectorAll(".site-mzl").forEach(button => {
-        button.addEventListener("click", () => {
-            alert("Cette page n'est pas accessible pour le moment !");
-        });
-    });
+
 
     // Profile picture handling
     const profilePic = document.getElementById("profilePic");
