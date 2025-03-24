@@ -275,6 +275,18 @@ input {
 
 
 
+/* Mot de passe */
+.password-box {
+    position: relative;
+    width: 100%;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    bottom: 12px;
+    cursor: pointer;
+}
 
 .button-container {
     margin-top: 20px;
@@ -318,6 +330,85 @@ input {
 
 .cancel-btn:focus {
     box-shadow: 0 0 0 4px rgba(156, 163, 175, 0.5); /* Focus ring */
+}
+
+/* ajouter les cours */
+
+.mon-profile{ 
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+}
+/* Statistiques */
+.course-tracking {
+    width: 100%;
+    overflow-x: auto; /* Active le défilement horizontal si nécessaire */
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.stats {
+    text-align: center;
+    background: #eee;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+/* Tableau des cours */
+table {
+    border-collapse: collapse;
+    margin-top: 10px;
+    overflow-x: auto;
+    max-width: 100%;
+    min-width: 600px;
+ 
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+th {
+    background-color: #342D67;
+    color: white;
+}
+
+/* Barre de progression */
+
+.progress-bar {
+    width: 100px;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    position: relative;
+}
+
+.progress-bar span {
+    height: 100%;
+    display: block;
+    border-radius: 5px;
+    background: #4CAF50;
+}
+
+/* Compétences Acquises */
+.skills ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.skills ul li {
+    display: inline-block;
+    background: #342D67;
+    color: white;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
 }
 
 /* Pied de page */

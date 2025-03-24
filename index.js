@@ -167,3 +167,109 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+
+
+// ajouter le track de cours
+// Exécute le code après le chargement du DOM
+document.addEventListener("DOMContentLoaded", function () {
+    // Sélection des éléments HTML où on va afficher les cours et les statistiques
+    const courseTableBody = document.getElementById("courseTableBody");
+    const skillsList = document.getElementById("skillsList");
+    const totalCourses = document.getElementById("totalCourses");
+    const completedCourses = document.getElementById("completedCourses");
+    const averageProgress = document.getElementById("averageProgress");
+
+    // Liste des cours suivis (exemple de données simulées)
+    const courses = [
+        {
+            title: "React & Next.js",
+            progress: 100, // Progression en pourcentage
+            startDate: "01/03/2024",
+            endDate: "01/04/2024",
+            completed: true, // Cours terminé ?
+            skills: ["React", "Next.js", "State Management"] // Compétences acquises
+        },
+        {
+            title: "SQL & NoSQL",
+            progress: 80,
+            startDate: "10/03/2024",
+            endDate: "10/04/2024",
+            completed: false,
+            skills: ["SQL", "NoSQL", "Database Optimization"]
+        },
+        {
+            title: "Python Basics",
+            progress: 60,
+            startDate: "15/03/2024",
+            endDate: "15/04/2024",
+            completed: false,
+            skills: ["Python", "Scripting", "Data Structures"]
+        }
+    ];
+
+    /**
+     * Fonction pour afficher les cours suivis dynamiquement
+     */
+    function loadCourses() {
+        courseTableBody.innerHTML = ""; // Vide la table avant d'ajouter les nouvelles données
+        let completedCount = 0; // Compteur de cours terminés
+        let totalProgress = 0; // Somme des pourcentages de progression
+
+        courses.forEach(course => {
+            const row = document.createElement("tr"); // Création d'une nouvelle ligne pour chaque cours
+
+            row.innerHTML = `
+                <td>${course.title}</td>
+                <td>
+                    <div class="progress-bar">
+                        <span style="width: ${course.progress}%;"></span>
+                    </div>
+                    ${course.progress}%
+                </td>
+                <td>${course.startDate}</td>
+                <td>${course.endDate}</td>
+                <td>${course.completed ? "✅ Terminé" : "⌛ En cours"}</td>
+            `;
+
+            courseTableBody.appendChild(row); // Ajout de la ligne au tableau
+
+            // Mise à jour du compteur des cours terminés
+            if (course.completed) completedCount++;
+
+            // Ajout de la progression totale pour le calcul de la moyenne
+            totalProgress += course.progress;
+        });
+
+        // Mise à jour des statistiques globales
+        totalCourses.textContent = courses.length; // Nombre total de cours
+        completedCourses.textContent = completedCount; // Nombre de cours terminés
+        averageProgress.textContent = Math.round(totalProgress / courses.length) + "%"; // Moyenne de progression
+    }
+
+    /**
+     * Fonction pour afficher les compétences acquises à partir des cours terminés
+     */
+    function loadSkills() {
+        skillsList.innerHTML = ""; // Vide la liste avant d'ajouter les nouvelles compétences
+        const allSkills = new Set(); // Utilisation d'un Set pour éviter les doublons
+
+        // Parcourt les cours terminés pour récupérer les compétences associées
+        courses.forEach(course => {
+            if (course.completed) {
+                course.skills.forEach(skill => allSkills.add(skill));
+            }
+        });
+
+        // Ajoute chaque compétence unique à la liste
+        allSkills.forEach(skill => {
+            const li = document.createElement("li");
+            li.textContent = skill;
+            skillsList.appendChild(li);
+        });
+    }
+
+    // Chargement initial des cours et des compétences
+    loadCourses();
+    loadSkills();
+});
