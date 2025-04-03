@@ -129,43 +129,18 @@ document.addEventListener("DOMContentLoaded", function () {
         profilePic.src = savedImage;
     }
 
-    // Save and restore user details
-    const saveBtn = document.querySelector(".save-btn");
-    const cancelBtn = document.querySelector(".cancel-btn");
-    const inputs = document.querySelectorAll(".input-box input");
+    const nom = localStorage.getItem("nom") || "Nom inconnu";
+    const prenom = localStorage.getItem("prenom") || "Prénom inconnu";
+    const email = localStorage.getItem("email") || "Email inconnu";
+    const telephone = localStorage.getItem("telephone") || "Numéro inconnu";
+    
+    document.getElementById("nom").textContent = nom;
+    document.getElementById("prenom").textContent = prenom;
+    document.getElementById("email").textContent = email;
+    document.getElementById("telephone").textContent = telephone;
 
-    function loadProfileData() {
-        inputs.forEach(input => {
-            const savedValue = localStorage.getItem(input.id);
-            if (savedValue) {
-                input.value = savedValue;
-            }
-        });
-    }
 
-    saveBtn.addEventListener("click", function () {
-        inputs.forEach(input => {
-            localStorage.setItem(input.id, input.value);
-        });
-        alert("Informations enregistrées avec succès !");
-    });
-
-    cancelBtn.addEventListener("click", function () {
-        loadProfileData();
-        alert("Modifications annulées !");
-    });
-
-    loadProfileData();
-
-    // Toggle password visibility
-    const togglePassword = document.querySelector(".toggle-password");
-    const passwordInput = document.getElementById("password");
-
-    if (togglePassword) {
-        togglePassword.addEventListener("click", function () {
-            passwordInput.type = passwordInput.type === "password" ? "text" : "password";
-        });
-    }
+    loadProfileData();  
 });
 
 
