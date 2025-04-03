@@ -129,20 +129,21 @@ document.addEventListener("DOMContentLoaded", function () {
         profilePic.src = savedImage;
     }
 
+    loadProfileData();  
+});
+
+document.addEventListener("DOMContentLoaded", () => {
     const nom = localStorage.getItem("nom") || "Nom inconnu";
     const prenom = localStorage.getItem("prenom") || "Prénom inconnu";
     const email = localStorage.getItem("email") || "Email inconnu";
     const telephone = localStorage.getItem("telephone") || "Numéro inconnu";
-    
+
     document.getElementById("nom").textContent = nom;
     document.getElementById("prenom").textContent = prenom;
     document.getElementById("email").textContent = email;
     document.getElementById("telephone").textContent = telephone;
-
-
-    loadProfileData();  
+    loadProfileData(); 
 });
-
 
 
 
