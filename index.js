@@ -129,20 +129,22 @@ document.addEventListener("DOMContentLoaded", function () {
         profilePic.src = savedImage;
     }
 
+
     loadProfileData();  
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    const nom = localStorage.getItem("nom") || "Nom inconnu";
-    const prenom = localStorage.getItem("prenom") || "Prénom inconnu";
-    const email = localStorage.getItem("email") || "Email inconnu";
-    const telephone = localStorage.getItem("telephone") || "Numéro inconnu";
+    function loadProfileData() {
+        document.getElementById("nom").textContent = localStorage.getItem("nom") || "Nom inconnu";
+        document.getElementById("prenom").textContent = localStorage.getItem("prenom") || "Prénom inconnu";
+        document.getElementById("email").textContent = localStorage.getItem("email") || "Email inconnu";
+        document.getElementById("telephone").textContent = localStorage.getItem("telephone") || "Numéro inconnu";
+    }
 
-    document.getElementById("nom").textContent = nom;
-    document.getElementById("prenom").textContent = prenom;
-    document.getElementById("email").textContent = email;
-    document.getElementById("telephone").textContent = telephone;
     loadProfileData(); 
+
+    // Listen for changes in localStorage (when settings are updated)
+    window.addEventListener("storage", loadProfileData);
 });
 
 
